@@ -6,7 +6,6 @@ public class Rodoviario extends Frete {
 
     @Override
     public void calcularValor() {
-        // 2% do valor da carga
         valorFrete = valorCarga * 0.02;
     }
 

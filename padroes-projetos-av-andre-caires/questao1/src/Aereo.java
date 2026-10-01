@@ -6,7 +6,6 @@ public class Aereo extends Frete {
 
     @Override
     public void calcularValor() {
-        // 6% do valor da carga
         valorFrete = valorCarga * 0.06;
     }
 

@@ -1,4 +1,3 @@
-// Client: só conhece as abstrações, sem if/switch por país (RNF02)
 public class Assinatura {
     private final FabricaArtefatos fabrica;
 
