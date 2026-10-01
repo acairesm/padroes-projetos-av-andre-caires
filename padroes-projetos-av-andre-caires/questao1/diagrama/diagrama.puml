@@ -1,0 +1,69 @@
+@startuml
+title Questão 1 - Factory Method (Contratação de Frete)
+
+abstract class FreteFabrica <<Creator>> {
+  #cliente: String
+  #valorCarga: double
+  +FreteFabrica(cliente: String, valorCarga: double)
+  +{abstract} criarFrete(): Frete
+  +contratar(): void {leaf}
+}
+
+class RodoviarioFabrica <<ConcreteCreator>> {
+  +RodoviarioFabrica(cliente: String, valorCarga: double)
+  +criarFrete(): Frete
+}
+class AereoFabrica <<ConcreteCreator>> {
+  +AereoFabrica(cliente: String, valorCarga: double)
+  +criarFrete(): Frete
+}
+class MaritimoFabrica <<ConcreteCreator>> {
+  +MaritimoFabrica(cliente: String, valorCarga: double)
+  +criarFrete(): Frete
+}
+
+abstract class Frete <<Product>> {
+  #modalidade: String
+  #documentosExigidos: String
+  #cliente: String
+  #valorCarga: double
+  #valorFrete: double
+  +Frete(modalidade: String, documentosExigidos: String, cliente: String, valorCarga: double)
+  +{abstract} calcularValor(): void
+  +imprimirResumo(): void
+}
+
+class Rodoviario <<ConcreteProduct>> {
+  +Rodoviario(cliente: String, valorCarga: double)
+  +calcularValor(): void
+}
+class Aereo <<ConcreteProduct>> {
+  +Aereo(cliente: String, valorCarga: double)
+  +calcularValor(): void
+}
+class Maritimo <<ConcreteProduct>> {
+  +Maritimo(cliente: String, valorCarga: double)
+  +calcularValor(): void
+}
+
+class Main {
+  +main(args: String[]): void
+}
+
+FreteFabrica <|-- RodoviarioFabrica
+FreteFabrica <|-- AereoFabrica
+FreteFabrica <|-- MaritimoFabrica
+
+Frete <|-- Rodoviario
+Frete <|-- Aereo
+Frete <|-- Maritimo
+
+FreteFabrica ..> Frete
+RodoviarioFabrica ..> Rodoviario : <<create>>
+AereoFabrica ..> Aereo : <<create>>
+MaritimoFabrica ..> Maritimo : <<create>>
+
+Main ..> RodoviarioFabrica
+Main ..> AereoFabrica
+Main ..> MaritimoFabrica
+@enduml

@@ -1,0 +1,81 @@
+@startuml
+title Questão 2 - Abstract Factory (Assinaturas Internacionais)
+
+interface FabricaArtefatos <<AbstractFactory>> {
+  +criarComprovanteFiscal(valor: double): ComprovanteFiscal
+  +criarPagamento(valor: double): Pagamento
+  +criarTermoPrivacidade(): TermoPrivacidade
+}
+
+class FabricaBrasil <<ConcreteFactory>>
+class FabricaMexico <<ConcreteFactory>>
+
+interface ComprovanteFiscal <<AbstractProduct>> {
+  +descricao(): String
+}
+interface Pagamento <<AbstractProduct>> {
+  +descricao(): String
+}
+interface TermoPrivacidade <<AbstractProduct>> {
+  +descricao(): String
+}
+
+class NfsE {
+  -valor: double
+  +descricao(): String
+}
+class Cfdi {
+  -valor: double
+  +descricao(): String
+}
+class PagamentoPix {
+  -valor: double
+  +descricao(): String
+}
+class PagamentoSpei {
+  -valor: double
+  +descricao(): String
+}
+class TermoLgpd {
+  +descricao(): String
+}
+class TermoLfpdppp {
+  +descricao(): String
+}
+
+class Assinatura <<Client>> {
+  -fabrica: FabricaArtefatos
+  +Assinatura(fabrica: FabricaArtefatos)
+  +ativar(cliente: String, valor: double): void
+}
+
+class Main {
+  +main(args: String[]): void
+}
+
+FabricaArtefatos <|.. FabricaBrasil
+FabricaArtefatos <|.. FabricaMexico
+
+ComprovanteFiscal <|.. NfsE
+ComprovanteFiscal <|.. Cfdi
+Pagamento <|.. PagamentoPix
+Pagamento <|.. PagamentoSpei
+TermoPrivacidade <|.. TermoLgpd
+TermoPrivacidade <|.. TermoLfpdppp
+
+FabricaBrasil ..> NfsE : <<create>>
+FabricaBrasil ..> PagamentoPix : <<create>>
+FabricaBrasil ..> TermoLgpd : <<create>>
+FabricaMexico ..> Cfdi : <<create>>
+FabricaMexico ..> PagamentoSpei : <<create>>
+FabricaMexico ..> TermoLfpdppp : <<create>>
+
+Assinatura o--> "1" FabricaArtefatos
+Assinatura ..> ComprovanteFiscal
+Assinatura ..> Pagamento
+Assinatura ..> TermoPrivacidade
+
+Main ..> Assinatura
+Main ..> FabricaBrasil
+Main ..> FabricaMexico
+@enduml
