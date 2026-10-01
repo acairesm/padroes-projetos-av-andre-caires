@@ -7,8 +7,16 @@ interface FabricaArtefatos <<AbstractFactory>> {
   +criarTermoPrivacidade(): TermoPrivacidade
 }
 
-class FabricaBrasil <<ConcreteFactory>>
-class FabricaMexico <<ConcreteFactory>>
+class FabricaBrasil <<ConcreteFactory>> {
+  +criarComprovanteFiscal(valor: double): ComprovanteFiscal
+  +criarPagamento(valor: double): Pagamento
+  +criarTermoPrivacidade(): TermoPrivacidade
+}
+class FabricaMexico <<ConcreteFactory>> {
+  +criarComprovanteFiscal(valor: double): ComprovanteFiscal
+  +criarPagamento(valor: double): Pagamento
+  +criarTermoPrivacidade(): TermoPrivacidade
+}
 
 interface ComprovanteFiscal <<AbstractProduct>> {
   +descricao(): String
