@@ -3,6 +3,7 @@ public class PagamentoPix implements Pagamento {
 
     public PagamentoPix(double valor) { this.valor = valor; }
 
+    @Override
     public String descricao() {
         return String.format("Pagamento via Pix de R$ %.2f", valor);
     }
